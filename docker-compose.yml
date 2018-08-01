@@ -1,0 +1,51 @@
+version: '3'
+
+volumes:
+  # data volumes allow the database container to be stateless
+  # data from postgres is stored in this volume, which is initialised here
+  # and is referenced further down when we declare the postgres container
+  postgres-data:
+
+# Docker's internal networking lets each service can be addressed
+# by its service name as a URL eg postgres:5432
+services:
+  conductor-service-phr:
+    image: rtweed/qewd-server
+    volumes:
+      - /ripple-qewd/conductor-service-phr:/opt/qewd/mapped
+      - /ripple-qewd/conductor-service-phr/www:/opt/qewd/www
+    ports:
+      - "8000:8080"
+
+  openid-connect-server:
+    image: rtweed/qewd-server
+    volumes:
+      - /ripple-qewd/openid-connect-server:/opt/qewd/mapped
+    ports:
+      - "8080:8080"
+
+  # master patient index service
+  # enables demographic lookup and identification of ehrId for a patient
+  mpi-service:
+    image: rtweed/qewd-server
+    volumes:
+      - /ripple-qewd/mpi-service:/opt/qewd/mapped
+    ports:
+      - "8002:8080"
+
+  authentication-service-phr:
+    image: rtweed/qewd-server
+    volumes:
+      - /ripple-qewd/cdr-service-openehr:/opt/qewd/mapped
+      - /ripple-qewd/yottadb/openehr:/root/.yottadb/r1.22_x86_64/g
+    ports:
+      - "8001:8080"
+
+  # contains clinical data, requires an ehrId from the MPI service
+  cdr-service-openehr:
+    image: rtweed/qewd-server
+    volumes:
+      - /ripple-qewd/cdr-service-openehr:/opt/qewd/mapped
+      - /ripple-qewd/yottadb/openehr:/root/.yottadb/r1.22_x86_64/g
+    ports:
+      - "8003:8080"
