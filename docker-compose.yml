@@ -1,13 +1,7 @@
 version: '3'
 
-volumes:
-  # data volumes allow the database container to be stateless
-  # data from postgres is stored in this volume, which is initialised here
-  # and is referenced further down when we declare the postgres container
-  postgres-data:
-
 # Docker's internal networking lets each service can be addressed
-# by its service name as a URL eg postgres:5432
+# by its service name as a URL eg conductor-service-phr:8000
 services:
   conductor-service-phr:
     image: rtweed/qewd-server
@@ -36,8 +30,8 @@ services:
   authentication-service-phr:
     image: rtweed/qewd-server
     volumes:
-      - /ripple-qewd/cdr-service-openehr:/opt/qewd/mapped
-      - /ripple-qewd/yottadb/openehr:/root/.yottadb/r1.22_x86_64/g
+      - /ripple-qewd/authentication-service-phr:/opt/qewd/mapped
+      - /ripple-qewd/yottadb/authentication:/root/.yottadb/r1.22_x86_64/g
     ports:
       - "8001:8080"
 

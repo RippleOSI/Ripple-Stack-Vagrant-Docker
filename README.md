@@ -15,10 +15,10 @@ Inside this VM we use [Docker](https://www.docker.com/what-docker) and [docker-c
 Vagrant is an automation layer that allows programmatic setup of a Virtual Machine, using any provider (eg Virtualbox, QEMU, VMWare etc) and on any platform. It means we can state which 'base box' we want to use (in this case it's Ubuntu 16.04, but it could be anything) and then specify what setup needs to be applied to that base box, eg networking, forwarded ports, shared drives, etc. If you look at our [Vagrantfile](Vagrantfile) you can see fairly easily what is going on, it's a nice clean syntax.
 
 ### What is Docker?
-Docker is a tool which greatly simplifies the use of Linux Containers, which you can envisage as a 'super-lightweight virtual machine' which interfaces directly at Linux kernel level, doing away with much of the inefficiency of traditional Virtual Machines. Because they are so lightweight and performant, the technology has  enabled individual software products like web servers or databases to be packaged and distributed in Docker containers, which have all the right dependencies pre-packaged in the container. This is great when you're setting up a complex environment and, for example, your stack has components which need *different* Java versions. Each Docker container would contain it's own correct Java version, and there is no dependency conflict.
+Docker is a tool which greatly simplifies the use of Linux Containers, which you can envisage as a 'super-lightweight virtual machine' which interfaces directly at Linux kernel level, doing away with much of the inefficiency of traditional Virtual Machines. Because they are so lightweight and performant, the technology has  enabled individual software products like web servers or databases to be packaged and distributed in Docker containers, which have all the right dependencies pre-packaged in the container. This is great when you're setting up a complex environment and, for example, your stack has components which need *different* Java versions, or Ruby versions, or whatever. Each Docker container would contain it's *own* correct Java or Ruby version, and there is no dependency conflict.
 
 ### What is Docker Compose?
-Docker Compose is another tool which comes with Docker, which enables programmatic setup and networking of multiple Docker containers. In this case we're using Docker Compose to provision the Ubuntu VM once Vagrant has done creating it.
+Docker Compose is another tool which comes with Docker, which enables programmatic setup and networking of multiple Docker containers. In this case we're using Docker Compose to provision the Ubuntu VM once Vagrant has done creating it. Docker Compose creates an internal network inside our Virtual Machine, and automatically plugs all the Docker containers into it.
 
 #### Why not just do all the setup in the Vagrantfile and let Vagrant do it all?
 Good question. You totally could do this and it would also work. Vagrant can be instructed to set up each of the Docker containers in the Vagrantfile. However, Docker Compose is a much more portable tool which can be used in other contexts, so having a working `docker-compose.yml` for the Ripple Stack enables the exact same code to be used again for  configuration of a Docker-only setup, for Boot2Docker, even for live deployments if necessary and appropriate.
@@ -52,4 +52,15 @@ You should now have four subdirectories in your development directory, one for e
 
 `vagrant up`
 
-That's it.
+That's it for setup. There will be reams of command line output scrolling past now, which is Vagrant creating the VM, downloading the base Ubuntu box, and setting up the VM. Then Docker Compose takes over to set up the numerous Docker containers, again there will be lots of command line output as this is done. Docker will automatically download all the containers it needs.
+
+## Monitoring and Troubleshooting
+To get inside your Vagrant Virtual Machine to see what's going on, type `vagrant ssh` into the command line (NB: you must be in the same directory that the Vagrantfile is in for this to work)
+
+You can check that the Docker containers were all created and are on the correct ports by typing `docker ps` which lists all the running Docker containers in the VM. You should see an output a bit like this:
+
+![]
+
+To see the logs of all the different services all together, with nice colour highlighting and timestamps, you can use `docker-compose logs -f -t` to connect to the logging output. To disconnect without stopping the containers, just use Ctrl+C. You should see something like the following output:
+
+![](images/docker-compose-logs-example.png)

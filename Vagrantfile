@@ -16,9 +16,12 @@ Vagrant.configure("2") do |config|
   # start with an Ubuntu 16.04 box TODO: upgrade to latest LTS 18.04
   config.vm.box = "ubuntu/xenial64"
 
-  # forward port 80 in the guest to port 8080 in the host so we can see what's going on
-  config.vm.network "forwarded_port", guest: 8000, host: 8000
-  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  # forward ports in the guest to ports
+  config.vm.network "forwarded_port", guest: 8000, host: 8000 # conductor-service-phr
+  config.vm.network "forwarded_port", guest: 8001, host: 8001 # authentication-service-phr
+  config.vm.network "forwarded_port", guest: 8002, host: 8002 # mpi-service
+  config.vm.network "forwarded_port", guest: 8003, host: 8003 # cdr-service-openehr
+  config.vm.network "forwarded_port", guest: 8080, host: 8080 # openid-connect-server
 
   # Sync the local clones of the development repos with the VM filesystem
   config.vm.synced_folder "../ripple-qewd", "/ripple-qewd"
