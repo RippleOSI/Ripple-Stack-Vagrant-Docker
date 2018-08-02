@@ -26,7 +26,11 @@ Good question. You totally could do this and it would also work. Vagrant can be 
 
 # Getting Started
 
-**Prerequisites/assumptions:** I am assuming a Unixy platform (MacOS or Linux) in the commands below, but the steps are the same for all platforms. You should have some familiarity with the command line in your platform, and you should have a Virtual Machine provider installed already (eg Virtualbox, VMware etc)
+**Prerequisites/assumptions:*
+* I am assuming a Unixy platform (MacOS or Linux) in the commands below, but the steps are the same for all platforms.
+* You should have some familiarity with the command line in your platform
+* You should have a Virtual Machine provider installed already (eg Virtualbox, VMware etc)
+* You will need a decent bandwidth Internet connection to download Vagrant, the virtual machine base box, Docker images, and all the NPM modules that are needed (this happens under the hood as each Docker container sets itself up)
 
 1. Install Vagrant. Instructions for this vary depending on your platform, so please [go to the Vagrant website](https://www.vagrantup.com/downloads.html) for details
 
@@ -35,7 +39,6 @@ Good question. You totally could do this and it would also work. Vagrant can be 
   `cd ripple`
 
 1. `git clone` this repository to get a copy of the files.
-
 `git clone https://github.com/pacharanero/ripple-stack-vagrant-docker.git`
 
 1. `git clone` the QEWD Microservices middleware component
@@ -59,7 +62,7 @@ To get inside your Vagrant Virtual Machine to see what's going on, type `vagrant
 
 You can check that the Docker containers were all created and are on the correct ports by typing `docker-compose ps` or `docker ps` which lists all the running Docker containers in the VM. You should see an output a bit like this, showing the services, each with a named container, and port mapping etc.
 
-![images/docker-ps-docker-compose-ps.png]
+![](images/docker-ps-docker-compose-ps.png)
 
 To see the logs of **all** the different services all together, with nice colour highlighting for each service and timestamps, you can use `docker-compose logs -f -t` to connect to the logging output. (the switches `-f` and `-t` make the output 'follow' and 'timestamped' respectively. To disconnect without stopping the containers, just use Ctrl+C. You should see something like the following output:
 
