@@ -2,7 +2,8 @@
 Development version of the Ripple Stack deployed via Vagrant (for cross-platform usability) and the docker-compose provisioner (for simplicity and minimal configuration)
 
 This repository contains a Vagrantfile and a Docker Compose file which together automate the setup of a working Ripple Stack.
-If you want to just get on with installation, [click here for the Getting Started section](#getting-started)
+
+I've started here with some explanation of why this development setup has been chosen, but if you want to just get on with installation, [click here to jump to the Getting Started section](#getting-started)
 
 ## Why use Vagrant and Docker?
 Docker on its own is not completely at home on all platforms, Windows in particular being a problem.
@@ -29,10 +30,9 @@ Good question. You totally could do this and it would also work. Vagrant can be 
 
 1. Install Vagrant. Instructions for this vary depending on your platform, so please [go to the Vagrant website](https://www.vagrantup.com/downloads.html) for details
 
-1. Navigate to wherever you are going to keep your development files, and create a folder to contain all the code for the Ripple Stack:
-
-`mkdir ripple`
-`cd ripple`
+1. Navigate to wherever you are going to keep your development files, and create a folder to contain all the code for the Ripple Stack.
+  `mkdir ripple`
+  `cd ripple`
 
 1. `git clone` this repository to get a copy of the files.
 
@@ -57,10 +57,10 @@ That's it for setup. There will be reams of command line output scrolling past n
 ## Monitoring and Troubleshooting
 To get inside your Vagrant Virtual Machine to see what's going on, type `vagrant ssh` into the command line (NB: you must be in the same directory that the Vagrantfile is in for this to work)
 
-You can check that the Docker containers were all created and are on the correct ports by typing `docker ps` which lists all the running Docker containers in the VM. You should see an output a bit like this:
+You can check that the Docker containers were all created and are on the correct ports by typing `docker-compose ps` or `docker ps` which lists all the running Docker containers in the VM. You should see an output a bit like this, showing the services, each with a named container, and port mapping etc.
 
-![]
+![images/docker-ps-docker-compose-ps.png]
 
-To see the logs of all the different services all together, with nice colour highlighting and timestamps, you can use `docker-compose logs -f -t` to connect to the logging output. To disconnect without stopping the containers, just use Ctrl+C. You should see something like the following output:
+To see the logs of **all** the different services all together, with nice colour highlighting for each service and timestamps, you can use `docker-compose logs -f -t` to connect to the logging output. (the switches `-f` and `-t` make the output 'follow' and 'timestamped' respectively. To disconnect without stopping the containers, just use Ctrl+C. You should see something like the following output:
 
 ![](images/docker-compose-logs-example.png)
