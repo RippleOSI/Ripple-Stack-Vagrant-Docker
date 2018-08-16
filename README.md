@@ -1,3 +1,5 @@
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
+
 # Ripple-Stack-Vagrant-Docker 
 Development version of the Ripple Stack deployed via Vagrant (for cross-platform usability) and the docker-compose provisioner (for simplicity and minimal configuration)
 
@@ -5,7 +7,8 @@ This repository contains a Vagrantfile and a Docker Compose file which together 
 
 I've started here with some explanation of why this development setup has been chosen, but if you want to just get on with installation, [click here to jump to the Getting Started section](#getting-started)
 
-GITTER.im SUPPORT CHANNEL: https://gitter.im/Ripple-Foundation/General
+### Support
+Gitter: [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
 
 ## Why use Vagrant _and_ Docker?
 Docker is great but on its own it's not completely at home on all platforms, Windows in particular being a problem, despite the advent of 'Native' GUI applications for Docker on Windows.
