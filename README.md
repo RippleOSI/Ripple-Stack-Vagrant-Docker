@@ -1,12 +1,17 @@
-# ripple-vagrant
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
+
+# Ripple-Stack-Vagrant-Docker 
 Development version of the Ripple Stack deployed via Vagrant (for cross-platform usability) and the docker-compose provisioner (for simplicity and minimal configuration)
 
 This repository contains a Vagrantfile and a Docker Compose file which together automate the setup of a working Ripple Stack.
 
 I've started here with some explanation of why this development setup has been chosen, but if you want to just get on with installation, [click here to jump to the Getting Started section](#getting-started)
 
-## Why use Vagrant and Docker?
-Docker on its own is not completely at home on all platforms, Windows in particular being a problem.
+### Support
+Gitter: [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
+
+## Why use Vagrant _and_ Docker?
+Docker is great but on its own it's not completely at home on all platforms, Windows in particular being a problem, despite the advent of 'Native' GUI applications for Docker on Windows.
 
 In order to make the development experience the same on all platforms, we've wrapped the development environment in a headless virtual machine (which is actually how the Ripple stack developer documentation suggests to do it anyway). Virtual machines work on all platforms and the Ubuntu guest that is created then gives us a consistent and reproducible development environment on all platforms.
 
@@ -19,14 +24,14 @@ Vagrant is an automation layer that allows programmatic setup of a Virtual Machi
 Docker is a tool which greatly simplifies the use of Linux Containers, which you can envisage as a 'super-lightweight virtual machine' which interfaces directly at Linux kernel level, doing away with much of the inefficiency of traditional Virtual Machines. Because they are so lightweight and performant, the technology has  enabled individual software products like web servers or databases to be packaged and distributed in Docker containers, which have all the right dependencies pre-packaged in the container. This is great when you're setting up a complex environment and, for example, your stack has components which need *different* Java versions, or Ruby versions, or whatever. Each Docker container would contain it's *own* correct Java or Ruby version, and there is no dependency conflict.
 
 ### What is Docker Compose?
-Docker Compose is another tool which comes with Docker, which enables programmatic setup and networking of multiple Docker containers. In this case we're using Docker Compose to provision the Ubuntu VM once Vagrant has done creating it. Docker Compose creates an internal network inside our Virtual Machine, and automatically plugs all the Docker containers into it.
+Docker Compose is another tool which comes with Docker, which enables programmatic setup and networking of **multiple** Docker containers. In this case we're using Docker Compose to provision several Docker containers inside Ubuntu VM once Vagrant has done creating it. Docker Compose creates an internal network inside our Virtual Machine, and automatically plugs all the Docker containers into it so they are connected together.
 
 #### Why not just do all the setup in the Vagrantfile and let Vagrant do it all?
-Good question. You totally could do this and it would also work. Vagrant can be instructed to set up each of the Docker containers in the Vagrantfile. However, Docker Compose is a much more portable tool which can be used in other contexts, so having a working `docker-compose.yml` for the Ripple Stack enables the exact same code to be used again for  configuration of a Docker-only setup, for Boot2Docker, even for live deployments if necessary and appropriate.
+Good question. You totally could do this and it would also work. Vagrant can be instructed to set up each of the Docker containers in the Vagrantfile. However, Docker Compose is a much more portable tool, which can be used in other contexts, so having a working `docker-compose.yml` for the Ripple Stack enables the exact same code to be used again for  configuration of a Docker-only setup, for Boot2Docker, even for live deployments if necessary and appropriate.
 
 # Getting Started
 
-**Prerequisites/assumptions:*
+**Prerequisites/assumptions:**
 * I am assuming a Unixy platform (MacOS or Linux) in the commands below, but the steps are the same for all platforms.
 * You should have some familiarity with the command line in your platform
 * You should have a Virtual Machine provider installed already (eg Virtualbox, VMware etc)
@@ -38,14 +43,13 @@ Good question. You totally could do this and it would also work. Vagrant can be 
   `mkdir ripple`
   `cd ripple`
 
-1. `git clone` this repository to get a copy of the files.
+1. `git clone` this repository.
 `git clone https://github.com/pacharanero/ripple-stack-vagrant-docker.git`
 
-1. `git clone` the QEWD Microservices middleware component
-1. `git clone` the Pulsetile React frontend component
-1. `git clone` the EtherCIS Clinical Data Repository component
+1. `git clone https://github.com/PulseTile/PulseTile-React-Core.git ripple-pulsetile` Puts Pulsetile in ripple/ripple-pulsetile 
+1. `git clone https://github.com/RippleOSI/Ripple-QEWD-Microservices ripple-qewd` Puts QEWD in our ripple/ripple-qewd
 
-You should now have four subdirectories in your development directory, one for each of the Ripple Stack components, and one for this repo. The reason for separating them like this, is so that you could do local development work on any of those components and still preserve the Git history of each separate repo. If we put them all in one folder we can get Git chaos.
+You should now have several subdirectories in your development directory, one for each of the Ripple Stack components, and one for this repo. The reason for separating them like this, is so that you could do local development work on *any* of those components and still preserve the Git history of each separate repo. If we put them all in one folder we can get Git chaos.
 
 1. go into the ripple-stack-vagrant-docker repository
 
@@ -55,7 +59,11 @@ You should now have four subdirectories in your development directory, one for e
 
 `vagrant up`
 
-That's it for setup. There will be reams of command line output scrolling past now, which is Vagrant creating the VM, downloading the base Ubuntu box, and setting up the VM. Then Docker Compose takes over to set up the numerous Docker containers, again there will be lots of command line output as this is done. Docker will automatically download all the containers it needs.
+There will be reams of command line output scrolling past now, which is Vagrant creating the VM, downloading the base Ubuntu box, and setting up the VM. Then Docker Compose takes over to set up the numerous Docker containers, again there will be lots of command line output as this is done. Docker will automatically download all the containers it needs.
+
+1. Configuration
+
+We're working on eliminating this next bit, however at present you will need to find out the IP address of your virtual machine using `ifconfig` on the host machine. Then you need to enter this IP into various configuration files as per the instructions at https://github.com/RippleOSI/Ripple-QEWD-Microservices#configuration. Again, as soon as it is possible to eliminate this tedious step we will do because we want Ripple setup to be as easy and automated as possible.
 
 ## Monitoring and Troubleshooting
 To get inside your Vagrant Virtual Machine to see what's going on, type `vagrant ssh` into the command line (NB: you must be in the same directory that the Vagrantfile is in for this to work)
@@ -67,3 +75,10 @@ You can check that the Docker containers were all created and are on the correct
 To see the logs of **all** the different services all together, with nice colour highlighting for each service and timestamps, you can use `docker-compose logs -f -t` to connect to the logging output. (the switches `-f` and `-t` make the output 'follow' and 'timestamped' respectively). To disconnect without stopping the containers, just use Ctrl+C. You should see something like the following output:
 
 ![](images/docker-compose-logs-example.png)
+
+### Some Errors We've Seen
+ERROR: 'client_id is required' => 
+ERROR: 'token is invalid' => `git checkout` the yottadb/ directory again - it's been corrupted
+
+## Support
+For support please talk to us in our open chat channel https://gitter.im/Ripple-Foundation/General
