@@ -64,6 +64,6 @@ You can check that the Docker containers were all created and are on the correct
 
 ![](images/docker-ps-docker-compose-ps.png)
 
-To see the logs of **all** the different services all together, with nice colour highlighting for each service and timestamps, you can use `docker-compose logs -f -t` to connect to the logging output. (the switches `-f` and `-t` make the output 'follow' and 'timestamped' respectively. To disconnect without stopping the containers, just use Ctrl+C. You should see something like the following output:
+To see the logs of **all** the different services all together, with nice colour highlighting for each service and timestamps, you can use `docker-compose logs -f -t` to connect to the logging output. (the switches `-f` and `-t` make the output 'follow' and 'timestamped' respectively). To disconnect without stopping the containers, just use Ctrl+C. You should see something like the following output:
 
 ![](images/docker-compose-logs-example.png)
