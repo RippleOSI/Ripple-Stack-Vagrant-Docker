@@ -1,8 +1,12 @@
 version: '3'
 
+# DOCKER-COMPOSE FILE FOR QEWD MICROSERVICES
+
 # Docker's internal networking lets each service can be addressed
 # by its service name as a URL eg conductor-service-phr:8000
 services:
+
+  # the conductor-service-phr proxies requests to the corretc microservice
   conductor-service-phr:
     image: rtweed/qewd-server
     volumes:
@@ -11,6 +15,7 @@ services:
     ports:
       - "8000:8080"
 
+  # the openid-connect-server mimics a CitizenID endpoint
   openid-connect-server:
     image: rtweed/qewd-server
     volumes:
