@@ -1,6 +1,6 @@
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
 
-# Ripple-Stack-Vagrant-Docker 
+# Ripple-Stack-Vagrant-Docker
 Development version of the Ripple Stack deployed via Vagrant (for cross-platform usability) and the docker-compose provisioner (for simplicity and minimal configuration)
 
 This repository contains a Vagrantfile and a Docker Compose file which together automate the setup of a working Ripple Stack.
@@ -29,6 +29,8 @@ Docker Compose is another tool which comes with Docker, which enables programmat
 #### Why not just do all the setup in the Vagrantfile and let Vagrant do it all?
 Good question. You totally could do this and it would also work. Vagrant can be instructed to set up each of the Docker containers in the Vagrantfile. However, Docker Compose is a much more portable tool, which can be used in other contexts, so having a working `docker-compose.yml` for the Ripple Stack enables the exact same code to be used again for  configuration of a Docker-only setup, for Boot2Docker, even for live deployments if necessary and appropriate.
 
+Here's a good intro to Docker and VMs for those wanting more help https://medium.freecodecamp.org/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b
+
 # Getting Started
 
 **Prerequisites/assumptions:**
@@ -46,7 +48,7 @@ Good question. You totally could do this and it would also work. Vagrant can be 
 1. `git clone` this repository.
 `git clone https://github.com/pacharanero/ripple-stack-vagrant-docker.git`
 
-1. `git clone https://github.com/PulseTile/PulseTile-React-Core.git ripple-pulsetile` Puts Pulsetile in ripple/ripple-pulsetile 
+1. `git clone https://github.com/PulseTile/PulseTile-React-Core.git ripple-pulsetile` Puts Pulsetile in ripple/ripple-pulsetile
 1. `git clone https://github.com/RippleOSI/Ripple-QEWD-Microservices ripple-qewd` Puts QEWD in our ripple/ripple-qewd
 
 You should now have several subdirectories in your development directory, one for each of the Ripple Stack components, and one for this repo. The reason for separating them like this, is so that you could do local development work on *any* of those components and still preserve the Git history of each separate repo. If we put them all in one folder we can get Git chaos.
@@ -77,7 +79,7 @@ To see the logs of **all** the different services all together, with nice colour
 ![](images/docker-compose-logs-example.png)
 
 ### Some Errors We've Seen
-ERROR: 'client_id is required' => 
+ERROR: 'client_id is required' =>
 ERROR: 'token is invalid' => `git checkout` the yottadb/ directory again - it's been corrupted
 
 ## Support

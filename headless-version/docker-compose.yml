@@ -1,12 +1,21 @@
 version: '3'
 
-# DOCKER-COMPOSE FILE FOR QEWD MICROSERVICES
+# DOCKER-COMPOSE FILE FOR RIPPLE STACK
+# If you don't require all the services you can comment out those you don't need here
 
-# Docker's internal networking lets each service can be addressed
-# by its service name as a URL eg conductor-service-phr:8000
 services:
 
-  # the conductor-service-phr proxies requests to the corretc microservice
+  #PULSETILE
+  # pulsetile is the react app which is the main Ripple UI
+  pulsetile:
+    build: ../../ripple-pulsetile # build for local Dockerfile
+    volumes:
+      - /ripple-pulsetile:/pulsetile/
+    ports:
+      - "3000:3000"
+
+  # QEWD-MICROSERVICES
+  # the conductor-service-phr proxies requests to the correct microservice
   conductor-service-phr:
     image: rtweed/qewd-server
     volumes:
@@ -48,3 +57,35 @@ services:
       - /ripple-qewd/yottadb/openehr:/root/.yottadb/r1.22_x86_64/g
     ports:
       - "8003:8080"
+
+  ### ETHERCIS ###
+
+  # ethercis-server is the openEHR persistence mechanism for Ripple Stack
+  ethercis-server:
+    image: pacharanero/ethercis-server-docker
+    depends_on:
+      - ethercis-db
+    ports:
+      - "8081:8080"
+    volumes:
+      - eth-server-logs:/var/opt/ecis/logs
+    environment:
+      - DB_HOST=ethercis-db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASS=postgres
+
+  # ethercis uses a customised PostgreSQL database internally
+  ethercis-db:
+    image: pacharanero/ethercis-database-docker
+    ports:
+      - "5432:5432"
+    volumes:
+      - eth-data-volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+
+# data volumes provide persistence. All other containers are ephemeral
+volumes:
+  eth-data-volume:
+  eth-server-logs:
