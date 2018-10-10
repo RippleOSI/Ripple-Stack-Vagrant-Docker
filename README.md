@@ -36,28 +36,33 @@ Here's a good intro to Docker and VMs for those wanting more help https://medium
 **Prerequisites/assumptions:**
 * I am assuming a Unixy platform (MacOS or Linux) in the commands below, but the steps are the same for all platforms.
 * You should have some familiarity with the command line in your platform
-* You should have a Virtual Machine provider installed already (eg Virtualbox, VMware etc)
+* You should have a Virtual Machine provider installed already (Virtualbox ideally)
 * You will need a decent bandwidth Internet connection to download Vagrant, the virtual machine base box, Docker images, and all the NPM modules that are needed (this happens under the hood as each Docker container sets itself up)
 
 1. Install Vagrant. Instructions for this vary depending on your platform, so please [go to the Vagrant website](https://www.vagrantup.com/downloads.html) for details
-
-1. Navigate to wherever you are going to keep your development files, and create a folder to contain all the code for the Ripple Stack.
+2. Navigate to wherever you are going to keep your development files, and create a folder to contain all the code for the Ripple Stack.
   `mkdir ripple`
   `cd ripple`
+3. `git clone https://github.com/pacharanero/ripple-stack-vagrant-docker.git` # `git clone` this repository
+4. `git clone https://github.com/PulseTile/PulseTile-React-Core.git ripple-pulsetile` Puts Pulsetile in ripple/ripple-pulsetile
+5. `git clone https://github.com/RippleOSI/Ripple-QEWD-Microservices ripple-qewd` Puts QEWD in our ripple/ripple-qewd
 
-1. `git clone` this repository.
-`git clone https://github.com/pacharanero/ripple-stack-vagrant-docker.git`
+You should now have several subdirectories in your development directory, one for each of the Ripple Stack components, and one for this repo.
 
-1. `git clone https://github.com/PulseTile/PulseTile-React-Core.git ripple-pulsetile` Puts Pulsetile in ripple/ripple-pulsetile
-1. `git clone https://github.com/RippleOSI/Ripple-QEWD-Microservices ripple-qewd` Puts QEWD in our ripple/ripple-qewd
+```
+ripple
+    ├── ripple-pulsetile
+    ├── ripple-qewd
+    └── ripple-stack-vagrant-docker
+```
 
-You should now have several subdirectories in your development directory, one for each of the Ripple Stack components, and one for this repo. The reason for separating them like this, is so that you could do local development work on *any* of those components and still preserve the Git history of each separate repo. If we put them all in one folder we can get Git chaos.
+**The reason for separating the repos in directories is so that you can do local development work on *any* of those components and still preserve the Git history of each separate repo. If we put them all in one folder we can get `git chaos`.**
 
-1. go into the ripple-stack-vagrant-docker repository
+6. go into the ripple-stack-vagrant-docker repository
 
 `cd ripple-stack-vagrant-docker`
 
-1. Start Vagrant
+7. Start Vagrant
 
 `vagrant up`
 

@@ -62,7 +62,7 @@ services:
 
   # ethercis-server is the openEHR persistence mechanism for Ripple Stack
   ethercis-server:
-    image: pacharanero/ethercis-server-docker
+    image: rippleosi/ethercis-server-docker
     depends_on:
       - ethercis-db
     ports:
@@ -77,7 +77,7 @@ services:
 
   # ethercis uses a customised PostgreSQL database internally
   ethercis-db:
-    image: pacharanero/ethercis-database-docker
+    image: rippleosi/ethercis-database-docker
     ports:
       - "5432:5432"
     volumes:
