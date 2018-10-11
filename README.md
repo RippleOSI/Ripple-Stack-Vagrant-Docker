@@ -1,6 +1,8 @@
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
 
-[![Ripple Stack](images/Ripple-Long-Stacked-Logo-Colour-700.png)](https://ripple.foundation/)
+<p align="middle">
+  <a href="https://ripple.foundation/"><img src="images/Ripple-Long-Stacked-Logo-Colour-700.png" width="500px" alt="Ripple Logo"></a>
+</p>
 
 # Ripple-Stack-Vagrant-Docker
 
