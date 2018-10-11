@@ -2,26 +2,49 @@
 
 [![Ripple Stack](images/Ripple-Long-Stacked-Logo-Colour-700.png)](https://ripple.foundation/)
 
+# Ripple-Stack-Vagrant-Docker
+
 <p align="middle">
   <a href="https://github.com/PulseTile/PulseTile-React-Core"><img src="images/pulsetile800.png" alt="PulseTile" width="200px"></a>
   <a href="https://github.com/RippleOSI/Ripple-QEWD-Microservices"><img src="images/qewd800redov5.png" alt="QEWD-Ripple-Microservices" width="200px"></a>
   <a href="https://github.com/ethercis/ethercis"><img src="images/ethercis800.png" alt="EtherCIS-Docker" width="200px"></a>
 </p>
 
-# Ripple-Stack-Vagrant-Docker
 Development version of the Ripple Stack deployed via Vagrant (for cross-platform usability) and the docker-compose provisioner (for simplicity and minimal configuration)
 
 This repository contains a Vagrantfile and a Docker Compose file which together automate the setup of a working Ripple Stack.
 
 I've started here with some explanation of why this development setup has been chosen, but if you want to just get on with installation, [click here to jump to the Getting Started section](#getting-started)
 
-### Support
-Gitter: [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
+## Table of Contents
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Ripple-Stack-Vagrant-Docker](#ripple-stack-vagrant-docker)
+	- [Table of Contents](#table-of-contents)
+	- [Introduction](#introduction)
+	- [Why use Vagrant _and_ Docker?](#why-use-vagrant-and-docker)
+		- [What is Vagrant?](#what-is-vagrant)
+		- [What is Docker?](#what-is-docker)
+		- [What is Docker Compose?](#what-is-docker-compose)
+			- [Why not just do all the setup in the Vagrantfile and let Vagrant do it all?](#why-not-just-do-all-the-setup-in-the-vagrantfile-and-let-vagrant-do-it-all)
+- [Getting Started](#getting-started)
+- [Monitoring and Troubleshooting](#monitoring-and-troubleshooting)
+- [Support](#support)
+		- [Some Errors We've Seen](#some-errors-weve-seen)
+
+<!-- /TOC -->
+
+## Introduction
+* The Ripple Stack is a suite of software packages (Pulsetile, QEWD-Ripple, and EtherCIS) which are designed to be usable as individual components or all together. This repo contains tools which simplify the use of the whole Ripple Stack all together.
+* The purpose of the Ripple Stack is to bring together cutting-edge open source components that can be used to build secure, scalable, interoperable healthcare applications, using modern web standards and openEHR persistence.
+* The repo creates a Virtualbox virtual machine containing all the components you need, with minimal further configuration required in order to demo, test and develop on the Ripple Stack.
+* If you are more comfoartable with native Docker, you can of course opt not to use the Vagrant VM and just use the `docker-compose.yml` within this repo to automate the setup of your stack.
+* You can of course use the Dockerized versions of our applications as standalone components as well.
 
 ## Why use Vagrant _and_ Docker?
 Docker is great but on its own it's not completely at home on all platforms, Windows in particular being a problem, despite the advent of 'Native' GUI applications for Docker on Windows.
 
-In order to make the development experience the same on all platforms, we've wrapped the development environment in a headless virtual machine (which is actually how the Ripple stack developer documentation suggests to do it anyway). Virtual machines work on all platforms and the Ubuntu guest that is created then gives us a consistent and reproducible development environment on all platforms.
+In order to make the development experience the same on **all** OS platforms, we've wrapped the development environment in a headless virtual machine (which is actually how the Ripple stack developer documentation suggests to do it anyway). Virtual machines work on all platforms and the Ubuntu guest that is created then gives us a consistent and reproducible development environment on all platforms.
 
 Inside this VM we use [Docker](https://www.docker.com/what-docker) and [docker-compose](https://docs.docker.com/compose/) to orchestrate the creation of all of the Ripple Stack components inside the VM, and these are all preconfigured to be able to communicate with each other. This process has reduce the setup complexity of the Ripple Stack from a 25-page document down to a few lines of commands.
 
@@ -76,11 +99,12 @@ ripple
 
 There will be reams of command line output scrolling past now, which is Vagrant creating the VM, downloading the base Ubuntu box, and setting up the VM. Then Docker Compose takes over to set up the numerous Docker containers, again there will be lots of command line output as this is done. Docker will automatically download all the containers it needs.
 
-1. Configuration
+8. Configuration
 
 We're working on eliminating this next bit, however at present you will need to find out the IP address of your virtual machine using `ifconfig` on the host machine. Then you need to enter this IP into various configuration files as per the instructions at https://github.com/RippleOSI/Ripple-QEWD-Microservices#configuration. Again, as soon as it is possible to eliminate this tedious step we will do because we want Ripple setup to be as easy and automated as possible.
 
-## Monitoring and Troubleshooting
+
+# Monitoring and Troubleshooting
 To get inside your Vagrant Virtual Machine to see what's going on, type `vagrant ssh` into the command line (NB: you must be in the same directory that the Vagrantfile is in for this to work)
 
 You can check that the Docker containers were all created and are on the correct ports by typing `docker-compose ps` or `docker ps` which lists all the running Docker containers in the VM. You should see an output a bit like this, showing the services, each with a named container, and port mapping etc.
@@ -91,9 +115,11 @@ To see the logs of **all** the different services all together, with nice colour
 
 ![](images/docker-compose-logs-example.png)
 
+
+# Support
+For support please talk to us in our open chat channel https://gitter.im/Ripple-Foundation/General
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
+
 ### Some Errors We've Seen
 ERROR: 'client_id is required' =>
 ERROR: 'token is invalid' => `git checkout` the yottadb/ directory again - it's been corrupted
-
-## Support
-For support please talk to us in our open chat channel https://gitter.im/Ripple-Foundation/General
