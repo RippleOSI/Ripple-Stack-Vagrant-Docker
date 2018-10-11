@@ -1,6 +1,6 @@
  -->[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
 
-[![Ripple Stack](ripple-stack-vagrant-docker/images/Ripple-Long-Stacked-Logo-Colour-700.png)](https://ripple.foundation/)
+[![Ripple Stack](images/Ripple-Long-Stacked-Logo-Colour-700.png)](https://ripple.foundation/)
 
 <p align="middle">
   <a href="https://github.com/PulseTile/PulseTile-React-Core"><img src="images/pulsetile800.png" alt="PulseTile" width="200px"></a>
