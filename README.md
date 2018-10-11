@@ -1,4 +1,12 @@
-[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
+ -->[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
+
+[![Ripple Stack](ripple-stack-vagrant-docker/images/Ripple-Long-Stacked-Logo-Colour-700.png)](https://ripple.foundation/)
+
+<p align="middle">
+  <a href="https://github.com/PulseTile/PulseTile-React-Core"><img src="ripple-stack-vagrant-docker/images/pulsetile800.png" alt="PulseTile" width="200px"></a>
+  <a href="https://github.com/RippleOSI/Ripple-QEWD-Microservices"><img src="ripple-stack-vagrant-docker/images/qewd800redov5.png" alt="QEWD-Ripple-Microservices" width="200px"></a>
+  <a href="https://github.com/ethercis/ethercis"><img src="ripple-stack-vagrant-docker/images/ethercis800.png" alt="EtherCIS-Docker" width="200px"></a>
+</p>
 
 # Ripple-Stack-Vagrant-Docker
 Development version of the Ripple Stack deployed via Vagrant (for cross-platform usability) and the docker-compose provisioner (for simplicity and minimal configuration)
