@@ -1,4 +1,4 @@
- -->[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
 
 [![Ripple Stack](images/Ripple-Long-Stacked-Logo-Colour-700.png)](https://ripple.foundation/)
 
