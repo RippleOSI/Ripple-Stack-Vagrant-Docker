@@ -40,7 +40,7 @@ I've started here with some explanation of why this development setup has been c
 * The Ripple Stack is a suite of software packages (Pulsetile, QEWD-Ripple, and EtherCIS) which are designed to be usable as individual components or all together. This repo contains tools which simplify the use of the whole Ripple Stack all together.
 * The purpose of the Ripple Stack is to bring together cutting-edge open source components that can be used to build secure, scalable, interoperable healthcare applications, using modern web standards and openEHR persistence.
 * The repo creates a Virtualbox virtual machine containing all the components you need, with minimal further configuration required in order to demo, test and develop on the Ripple Stack.
-* If you are more comfoartable with native Docker, you can of course opt not to use the Vagrant VM and just use the `docker-compose.yml` within this repo to automate the setup of your stack.
+* If you are more comfortable with native Docker, you can of course opt not to use the Vagrant VM and just use the `docker-compose.yml` within this repo to automate the setup of your stack.
 * You can of course use the Dockerized versions of our applications as standalone components as well.
 
 ## Why use Vagrant _and_ Docker?
