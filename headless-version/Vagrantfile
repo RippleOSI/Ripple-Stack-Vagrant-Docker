@@ -14,7 +14,8 @@ end
 
 Vagrant.configure("2") do |config|
   # start with an Ubuntu 18.04 box
-  config.vm.box = "ubuntu/bionic64"
+  config.vm.box = "rippleosi/headless"
+  config.vm.box_version = "0.1.0"
 
   # set higher RAM allowance than the default 1Gb (because we're running 9+ containers)
   config.vm.provider "virtualbox" do |v|
@@ -36,9 +37,6 @@ Vagrant.configure("2") do |config|
   # IMPORTANT - SYNCED FOLDERS OF THE RIPPLE STACK COMPONENTS MUST BE NAMED CORRECTLY
   config.vm.synced_folder "../../ripple-pulsetile", "/ripple-pulsetile"   # Pulsetile
   config.vm.synced_folder "../../ripple-qewd", "/ripple-qewd"   # QEWD-Microservices
-
-  config.vm.provision :shell, inline: "sudo apt update"
-  config.vm.provision :shell, inline: "sudo apt install -y language-pack-en"
 
   # install docker
   config.vm.provision :docker, run: "always"

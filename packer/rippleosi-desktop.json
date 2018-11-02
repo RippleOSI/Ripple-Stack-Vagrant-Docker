@@ -1,0 +1,9 @@
+{
+  "_comment": "Build with `packer build -var-file=ubuntu1804-desktop.json -var-file=rippleosi-desktop.json ubuntu.json`",
+  "vm_name": "ubuntu1804-desktop",
+  "locale": "en_GB.UTF-8",
+  "cpus": "2",
+  "memory": "2048",
+  "disk_size": "65536",
+  "custom_script": "rippleosi-desktop.sh"
+}

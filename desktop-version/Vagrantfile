@@ -1,9 +1,16 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Check for required plugins and install missing plugins
+required_plugins = %w( vagrant-vbguest vagrant-docker-compose)
+required_plugins.each do |plugin|
+    exec "vagrant plugin install #{plugin};vagrant #{ARGV.join(" ")}" unless Vagrant.has_plugin? plugin || ARGV[0] == 'plugin'
+end
+
 Vagrant.configure("2") do |config|
   # start with an Ubuntu 18.04 box
-  config.vm.box = "ubuntu/bionic64"
+  config.vm.box = "rippleosi/desktop"
+  config.vm.box_version = "0.1.0"
 
   # forward ports in the guest's microservices to host ports
   config.vm.network "forwarded_port", guest: 8000, host: 8000 # conductor-service-phr
@@ -25,21 +32,6 @@ Vagrant.configure("2") do |config|
   # put the headless-version's docker-compose.yml in the right place
   config.vm.synced_folder "../headless-version/", "/docker/"
 
-  # system updates
-  config.vm.provision :shell, inline: "sudo apt update"
-  # localization (only required for en-uk)
-  config.vm.provision :shell, inline: "sudo apt install -y language-pack-en"
-  # install virtualbox guest utils which enable the screen and better integration
-  config.vm.provision :shell, inline: "sudo apt install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11"
-  # install graphical UI
-  config.vm.provision :shell, inline: "sudo apt-get install -y --no-install-recommends ubuntu-desktop"
-  # install atom and other utilities
-  config.vm.provision :shell, inline: "curl -sL https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -"
-  config.vm.provision :shell, inline: "echo 'deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main' > /etc/apt/sources.list.d/atom.list"
-  config.vm.provision :shell, inline: "sudo apt update"
-  config.vm.provision :shell, inline: "sudo apt-get install -y atom"
-  config.vm.provision :shell, inline: "sudo apt-get install -y chromium-browser"
-  
   # install docker
   config.vm.provision :docker, run: "always"
 
