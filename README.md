@@ -4,35 +4,36 @@
   <a href="https://ripple.foundation/"><img src="images/Ripple-Long-Stacked-Logo-Colour-700.png" width="500px" alt="Ripple Logo"></a>
 </p>
 
-# Ripple-Stack-Vagrant-Docker
-
 <p align="middle">
   <a href="https://github.com/PulseTile/PulseTile-React-Core"><img src="images/pulsetile800.png" alt="PulseTile" width="200px"></a>
   <a href="https://github.com/RippleOSI/Ripple-QEWD-Microservices"><img src="images/qewd800redov5.png" alt="QEWD-Ripple-Microservices" width="200px"></a>
   <a href="https://github.com/ethercis/ethercis"><img src="images/ethercis800.png" alt="EtherCIS-Docker" width="200px"></a>
 </p>
 
+# Ripple-Stack-Vagrant-Docker
+
 Development version of the Ripple Stack deployed via Vagrant (for cross-platform usability) and the docker-compose provisioner (for simplicity and minimal configuration)
 
 This repository contains a Vagrantfile and a Docker Compose file which together automate the setup of a working Ripple Stack.
 
-I've started here with some explanation of why this development setup has been chosen, but if you want to just get on with installation, [click here to jump to the Getting Started section](#getting-started)
+I've started here with some explanation of why this development setup has been chosen, but if you want to just get on with installation, jump to the [Get RippleOSI Stack]() section.
 
-## Table of Contents
+
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-- [Ripple-Stack-Vagrant-Docker](#ripple-stack-vagrant-docker)
-	- [Table of Contents](#table-of-contents)
-	- [Introduction](#introduction)
-	- [Why use Vagrant _and_ Docker?](#why-use-vagrant-and-docker)
-		- [What is Vagrant?](#what-is-vagrant)
-		- [What is Docker?](#what-is-docker)
-		- [What is Docker Compose?](#what-is-docker-compose)
-			- [Why not just do all the setup in the Vagrantfile and let Vagrant do it all?](#why-not-just-do-all-the-setup-in-the-vagrantfile-and-let-vagrant-do-it-all)
-- [Getting Started](#getting-started)
-- [Monitoring and Troubleshooting](#monitoring-and-troubleshooting)
-- [Support](#support)
-	- [Some Errors We've Seen](#some-errors-we've-seen)
+- [Ripple-Stack-Vagrant-Docker]()
+- [Table of Contents]()
+- [Introduction]()
+- [Why use Vagrant _and_ Docker?]()
+	- [What is Vagrant?]()
+	- [What is Docker?]()
+	- [What is Docker Compose?]()
+	- [Why not just do all the setup in the Vagrantfile and let Vagrant do it all?]()
+- [Prerequisites/assumptions:]()
+- [Get RippleOSI Stack]()
+- [Start RippleOSI Stack]()
+  - [Monitoring and Troubleshooting]()
+- [Support]()
+	- [Some Errors We've Seen]()
 
 <!-- /TOC -->
 
@@ -64,7 +65,7 @@ Good question. You totally could do this and it would also work. Vagrant can be 
 
 Here's a good intro to Docker and VMs for those wanting more help https://medium.freecodecamp.org/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b
 
-**Prerequisites/assumptions:**
+## Prerequisites/assumptions:
 * I am assuming a Unixy platform (MacOS or Linux) in the commands below, but the steps are the same for all platforms.
 * You should have some familiarity with the command line in your platform
 * You should have a Virtual Machine provider installed already (Virtualbox ideally)
@@ -72,7 +73,7 @@ Here's a good intro to Docker and VMs for those wanting more help https://medium
 * You will need Vagrant. Instructions for this vary depending on your platform, so please [go to the Vagrant website](https://www.vagrantup.com/downloads.html) for details
 
 
-# Getting RippleOSI Stack
+# Get RippleOSI Stack
 
 Navigate to wherever you are going to keep your development files, and create a folder to contain all the code for the Ripple Stack.
 
@@ -97,7 +98,11 @@ ripple
 
 ### Configuration
 
-The default IP for the Stack VM is 192.168.50.100. You need to enter this IP into various configuration files as per the instructions at https://github.com/RippleOSI/Ripple-QEWD-Microservices#configuration. Sorry. We are working on eliminating this step with automagicalness.
+The default IP for the Stack VM is `192.168.50.100`.
+
+You need to enter this IP into various configuration files as per the instructions at https://github.com/RippleOSI/Ripple-QEWD-Microservices#configuration.
+
+Sorry. We are working on eliminating this step with automagicalness.
 
 
 # Start RippleOSI Stack
