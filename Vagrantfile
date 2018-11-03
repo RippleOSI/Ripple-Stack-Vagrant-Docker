@@ -21,7 +21,6 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 8003, host: 8003 # cdr-service-openehr
   config.vm.network "forwarded_port", guest: 8080, host: 8080 # openid-connect-server
 
-
   # Mount ripple stack components
   config.vm.synced_folder "../ripple-pulsetile", "/ripple-pulsetile" # Pulsetile
   config.vm.synced_folder "../ripple-qewd", "/ripple-qewd" # Qewd.js

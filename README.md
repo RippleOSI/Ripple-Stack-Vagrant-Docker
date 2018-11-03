@@ -16,7 +16,7 @@ Development version of the Ripple Stack deployed via Vagrant (for cross-platform
 
 This repository contains a Vagrantfile and a Docker Compose file which together automate the setup of a working Ripple Stack.
 
-I've started here with some explanation of why this development setup has been chosen, but if you want to just get on with installation, jump to the [Get RippleOSI Stack]() section.
+I've started here with some explanation of why this development setup has been chosen, but if you want to just get on with installation, jump to the [Get Ripple Stack](#get-ripple-stack) section.
 
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
@@ -26,13 +26,13 @@ I've started here with some explanation of why this development setup has been c
 	- [What is Vagrant](#what-is-vagrant)?
 	- [What is Docker](#what-is-docker)?
 	- [What is Docker Compose](#what-is-docker-compose)?
-	- [Why not just do all the setup in the Vagrantfile and let Vagrant do it all?]()
-- [Requirements and assumptions](#)
+	- [Why not just do all the setup in the Vagrantfile and let Vagrant do it all](#why-not-just-do-all-the-setup-in-the-vagrantfile-and-let-vagrant-do-it-all)?
+- [Requirements and assumptions](#requirements-and-assumptions)
 - [Get Ripple Stack](#get-ripple-stack)
 - [Run Ripple Stack](#run-ripple-stack)
-  - [Monitoring and Troubleshooting]()
-- [Support]()
-	- [Some Errors We've Seen]()
+  - [Monitoring and Troubleshooting](#Monitoring-and-Troubleshooting)
+- [Support](#support)
+	<!-- - [Some Errors We've Seen]() -->
 
 <!-- /TOC -->
 

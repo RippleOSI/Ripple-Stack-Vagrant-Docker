@@ -1,9 +1,30 @@
 # Vagrant environments
 
+## Ripple Stack - Desktop
 
-```log
-2018-11-03 00:44:45 ⌚  rd-nuc in ~/Development/robdyke/Ripple-Stack-Vagrant-Docker
-± |feature-vagrant-base-box → origin U:1 ?:1 ✗| → vagrant up stack
+- `vagrant up desktop`
+- 192.168.50.10
+
+## Ripple Stack - Multi machine
+
+Stack 1
+ - `vagrant up stack1`
+ - 192.168.50.101
+
+Stack 2
+- `vagrant up stack2`
+- 192.168.50.102
+
+
+## Default Ripple Stack
+
+    vagrant up stack
+
+Starting the environment with the default should look like this:
+
+```shell
+2018-11-03 00:44:45 ⌚  box in ~/Development/ripple/ripple-stack
+± | origin U:1 ?:1 ✗| → vagrant up stack
 Bringing machine 'stack' up with 'virtualbox' provider...
 ==> stack: Importing base box 'rippleosi/headless'...
 ==> stack: Matching MAC address for NAT networking...
@@ -43,9 +64,9 @@ Bringing machine 'stack' up with 'virtualbox' provider...
 ==> stack: Setting hostname...
 ==> stack: Configuring and enabling network interfaces...
 ==> stack: Mounting shared folders...
-   stack: /docker => /home/robd/Development/robdyke/Ripple-Stack-Vagrant-Docker/docker
-   stack: /ripple-qewd => /home/robd/Development/robdyke/ripple-qewd
-   stack: /ripple-pulsetile => /home/robd/Development/robdyke/ripple-pulsetile
+   stack: /docker => /Development/ripple/ripple-stack/docker
+   stack: /ripple-qewd => /Development/ripple/ripple-qewd
+   stack: /ripple-pulsetile => /Development/ripple/ripple-pulsetile
 ==> stack: Running provisioner: docker...
    stack: Installing Docker onto machine...
 ==> stack: Running provisioner: shell...
@@ -56,19 +77,3 @@ Bringing machine 'stack' up with 'virtualbox' provider...
    stack: INFO: Install docker-compose
    stack: INFO: Add bash completion for docker-compose
 ```
-
-## RippleOSI Desktop
-
-`vagrant up desktop`
-
-Vagrant will import our Vagrantbox rippleosi/desktop VM and start a VM. Then Docker will fetch the Ripple stack containers and start the services.
-
-## RippleOSI Multi VM
-
-Stack 1
- - `vagrant up stack1`
- - 192.168.50.101
-
-Stack 2
-- `vagrant up stack2`
-- 192.168.50.102
