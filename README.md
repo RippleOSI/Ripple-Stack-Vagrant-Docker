@@ -32,7 +32,7 @@ I've started here with some explanation of why this development setup has been c
 - [Getting Started](#getting-started)
 - [Monitoring and Troubleshooting](#monitoring-and-troubleshooting)
 - [Support](#support)
-		- [Some Errors We've Seen](#some-errors-weve-seen)
+	- [Some Errors We've Seen](#some-errors-we've-seen)
 
 <!-- /TOC -->
 
@@ -64,21 +64,25 @@ Good question. You totally could do this and it would also work. Vagrant can be 
 
 Here's a good intro to Docker and VMs for those wanting more help https://medium.freecodecamp.org/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b
 
-# Getting Started
-
 **Prerequisites/assumptions:**
 * I am assuming a Unixy platform (MacOS or Linux) in the commands below, but the steps are the same for all platforms.
 * You should have some familiarity with the command line in your platform
 * You should have a Virtual Machine provider installed already (Virtualbox ideally)
 * You will need a decent bandwidth Internet connection to download Vagrant, the virtual machine base box, Docker images, and all the NPM modules that are needed (this happens under the hood as each Docker container sets itself up)
+* You will need Vagrant. Instructions for this vary depending on your platform, so please [go to the Vagrant website](https://www.vagrantup.com/downloads.html) for details
 
-1. Install Vagrant. Instructions for this vary depending on your platform, so please [go to the Vagrant website](https://www.vagrantup.com/downloads.html) for details
-2. Navigate to wherever you are going to keep your development files, and create a folder to contain all the code for the Ripple Stack.
-  `mkdir ripple`
-  `cd ripple`
-3. `git clone https://github.com/pacharanero/ripple-stack-vagrant-docker.git` # `git clone` this repository
-4. `git clone https://github.com/PulseTile/PulseTile-React-Core.git ripple-pulsetile` Puts Pulsetile in ripple/ripple-pulsetile
-5. `git clone https://github.com/RippleOSI/Ripple-QEWD-Microservices ripple-qewd` Puts QEWD in our ripple/ripple-qewd
+
+# Getting RippleOSI Stack
+
+Navigate to wherever you are going to keep your development files, and create a folder to contain all the code for the Ripple Stack.
+
+```
+mkdir ripple
+cd ripple
+git clone https://github.com/pacharanero/ripple-stack-vagrant-docker.git` ripple-stack # `git clone` this repository in ripple-stack
+git clone https://github.com/PulseTile/PulseTile-React-Core.git ripple-pulsetile` # Puts Pulsetile in ripple-pulsetile
+git clone https://github.com/RippleOSI/Ripple-QEWD-Microservices ripple-qewd` # Puts QEWD in our ripple-qewd
+```
 
 You should now have several subdirectories in your development directory, one for each of the Ripple Stack components, and one for this repo.
 
@@ -86,28 +90,25 @@ You should now have several subdirectories in your development directory, one fo
 ripple
     ├── ripple-pulsetile
     ├── ripple-qewd
-    └── ripple-stack-vagrant-docker
+    └── ripple-stack
 ```
 
-**The reason for separating the repos in directories is so that you can do local development work on *any* of those components and still preserve the Git history of each separate repo. If we put them all in one folder we can get `git chaos`.**
+*The reason for separating the repos in directories is so that you can do local development work on *any* of those components and still preserve the Git history of each separate repo. If we put them all in one folder we can get `git chaos`.*
 
-6. go into the ripple-stack-vagrant-docker repository
+### Configuration
 
-`cd ripple-stack-vagrant-docker`
-
-7. Start Vagrant
-
-`vagrant up`
-
-There will be reams of command line output scrolling past now, which is Vagrant creating the VM, downloading the base Ubuntu box, and setting up the VM. Then Docker Compose takes over to set up the numerous Docker containers, again there will be lots of command line output as this is done. Docker will automatically download all the containers it needs.
-
-8. Configuration
-
-We're working on eliminating this next bit, however at present you will need to find out the IP address of your virtual machine using `ifconfig` on the host machine. Then you need to enter this IP into various configuration files as per the instructions at https://github.com/RippleOSI/Ripple-QEWD-Microservices#configuration. Again, as soon as it is possible to eliminate this tedious step we will do because we want Ripple setup to be as easy and automated as possible.
+The default IP for the Stack VM is 192.168.50.100. You need to enter this IP into various configuration files as per the instructions at https://github.com/RippleOSI/Ripple-QEWD-Microservices#configuration. Sorry. We are working on eliminating this step with automagicalness.
 
 
-# Monitoring and Troubleshooting
-To get inside your Vagrant Virtual Machine to see what's going on, type `vagrant ssh` into the command line (NB: you must be in the same directory that the Vagrantfile is in for this to work)
+# Start RippleOSI Stack
+
+`vagrant up stack`
+
+Vagrant will import our Vagrantbox rippleosi/headless and start a VM. Then Docker will fetch the Ripple stack containers and start the services.
+
+
+## Monitoring and Troubleshooting
+To get inside your Vagrant Virtual Machine to see what's going on, type `vagrant ssh`
 
 You can check that the Docker containers were all created and are on the correct ports by typing `docker-compose ps` or `docker ps` which lists all the running Docker containers in the VM. You should see an output a bit like this, showing the services, each with a named container, and port mapping etc.
 
@@ -123,5 +124,8 @@ For support please talk to us in our open chat channel https://gitter.im/Ripple-
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/Ripple-Foundation/General)
 
 ### Some Errors We've Seen
+```
 ERROR: 'client_id is required' =>
-ERROR: 'token is invalid' => `git checkout` the yottadb/ directory again - it's been corrupted
+ERROR: 'token is invalid' =>
+```
+`git checkout` the yottadb/ directory again - it's been corrupted
