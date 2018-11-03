@@ -22,9 +22,9 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 8080, host: 8080 # openid-connect-server
 
 
-  # Sync the local clones of the development repos with the VM filesystem
-  # config.vm.synced_folder "../../ripple-pulsetile", "/ripple-pulsetile"   # Pulsetile
-  # config.vm.synced_folder "../../ripple-qewd", "/ripple-qewd"
+  # Mount ripple stack components
+  config.vm.synced_folder "../ripple-pulsetile", "/ripple-pulsetile" # Pulsetile
+  config.vm.synced_folder "../ripple-qewd", "/ripple-qewd" # Qewd.js
 
   # Mount docker to /docker
   config.vm.synced_folder "docker/", "/docker/"
@@ -42,8 +42,8 @@ Vagrant.configure("2") do |config|
     d.vm.network :private_network, ip: "#{$subnet}.10"
     d.vm.synced_folder ".", "/vagrant", disabled: true
     d.vm.provision :docker
-    # d.vm.provision "shell", path: "tooling/docker-helpers.sh", args: "engine", privileged: false
-    # d.vm.provision "shell", path: "tooling/docker-helpers.sh", args: "compose", privileged: false
+    d.vm.provision "shell", path: "docker/docker-helpers.sh", args: "engine", privileged: false
+    d.vm.provision "shell", path: "docker/docker-helpers.sh", args: "compose", privileged: false
   end
 
   # Define headless version
@@ -58,7 +58,8 @@ Vagrant.configure("2") do |config|
       s.vm.hostname = "ripple-stack"
       s.vm.network :private_network, ip: "#{$subnet}.100"
       s.vm.provision :docker
-      # s.vm.provision "shell", path: "tooling/docker-helpers.sh", args: "engine", privileged: false
+      s.vm.provision "shell", path: "docker/docker-helpers.sh", args: "engine", privileged: false
+      s.vm.provision "shell", path: "docker/docker-helpers.sh", args: "compose", privileged: false
     end
 
   # Define headless version
@@ -74,7 +75,7 @@ Vagrant.configure("2") do |config|
       s.vm.hostname = "ripple-stack#{i}"
       s.vm.network :private_network, ip: "#{$subnet}.#{i+100}"
       s.vm.provision :docker
-      # s.vm.provision "shell", path: "tooling/docker-helpers.sh", args: "engine", privileged: false
+      s.vm.provision "shell", path: "docker/docker-helpers.sh", args: "engine", privileged: false
     end
   end
 

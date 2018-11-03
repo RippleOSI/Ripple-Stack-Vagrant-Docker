@@ -20,17 +20,16 @@ I've started here with some explanation of why this development setup has been c
 
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-- [Ripple-Stack-Vagrant-Docker]()
-- [Table of Contents]()
-- [Introduction]()
-- [Why use Vagrant _and_ Docker?]()
-	- [What is Vagrant?]()
-	- [What is Docker?]()
-	- [What is Docker Compose?]()
+- [Ripple-Stack-Vagrant-Docker](#ripple-stack-vagrant-docker)
+- [Introduction](#introduction)
+- [Why use Vagrant and Docker](#why-use-vagrant-and-docker)?
+	- [What is Vagrant](#what-is-vagrant)?
+	- [What is Docker](#what-is-docker)?
+	- [What is Docker Compose](#what-is-docker-compose)?
 	- [Why not just do all the setup in the Vagrantfile and let Vagrant do it all?]()
-- [Prerequisites/assumptions:]()
-- [Get RippleOSI Stack]()
-- [Start RippleOSI Stack]()
+- [Requirements and assumptions](#)
+- [Get Ripple Stack](#get-ripple-stack)
+- [Run Ripple Stack](#run-ripple-stack)
   - [Monitoring and Troubleshooting]()
 - [Support]()
 	- [Some Errors We've Seen]()
@@ -65,7 +64,7 @@ Good question. You totally could do this and it would also work. Vagrant can be 
 
 Here's a good intro to Docker and VMs for those wanting more help https://medium.freecodecamp.org/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b
 
-## Prerequisites/assumptions:
+## Requirements and assumptions
 * I am assuming a Unixy platform (MacOS or Linux) in the commands below, but the steps are the same for all platforms.
 * You should have some familiarity with the command line in your platform
 * You should have a Virtual Machine provider installed already (Virtualbox ideally)
@@ -73,7 +72,7 @@ Here's a good intro to Docker and VMs for those wanting more help https://medium
 * You will need Vagrant. Instructions for this vary depending on your platform, so please [go to the Vagrant website](https://www.vagrantup.com/downloads.html) for details
 
 
-# Get RippleOSI Stack
+# Get Ripple Stack
 
 Navigate to wherever you are going to keep your development files, and create a folder to contain all the code for the Ripple Stack.
 
@@ -105,7 +104,7 @@ You need to enter this IP into various configuration files as per the instructio
 Sorry. We are working on eliminating this step with automagicalness.
 
 
-# Start RippleOSI Stack
+# Run Ripple Stack
 
 `vagrant up stack`
 
