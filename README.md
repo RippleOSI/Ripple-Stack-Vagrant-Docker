@@ -77,15 +77,15 @@ Here's a good intro to Docker and VMs for those wanting more help https://medium
 
 Navigate to wherever you are going to keep your development files, and create a folder to contain all the code for the Ripple Stack.
 
-```
+```sh
 mkdir ripple
 cd ripple
-git clone https://github.com/pacharanero/ripple-stack-vagrant-docker.git` ripple-stack # `git clone` this repository in ripple-stack
-git clone https://github.com/PulseTile/PulseTile-React-Core.git ripple-pulsetile` # Puts Pulsetile in ripple-pulsetile
-git clone https://github.com/RippleOSI/Ripple-QEWD-Microservices ripple-qewd` # Puts QEWD in our ripple-qewd
+git clone https://github.com/pacharanero/ripple-stack-vagrant-docker.git ripple-stack # Puts this repository in ripple-stack
+git clone https://github.com/PulseTile/PulseTile-React-Core.git ripple-pulsetile # Puts Pulsetile in ripple-pulsetile
+git clone https://github.com/RippleOSI/Ripple-QEWD-Microservices ripple-qewd # Puts QEWD in ripple-qewd
 ```
 
-You should now have several subdirectories in your development directory, one for each of the Ripple Stack components, and one for this repo.
+You should now have several subdirectories in your development directory, one for each of the Ripple components.
 
 ```
 ripple
@@ -109,7 +109,9 @@ Sorry. We are working on eliminating this step with automagicalness.
 
 `vagrant up stack`
 
-Vagrant will import our Vagrantbox rippleosi/headless and start a VM. Then Docker will fetch the Ripple stack containers and start the services.
+Vagrant will import our Vagrantbox `rippleosi/headless` and start the VM. Then Docker will fetch the Ripple stack containers and start the services.
+
+There are [alternative versions of the Stack in the Vagrantfile](docs/vagrant.md).
 
 
 ## Monitoring and Troubleshooting
