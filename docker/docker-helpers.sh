@@ -16,6 +16,24 @@ DC_BASE=https://github.com/docker/compose/releases/download/1.21.2
 DC_BASH=https://raw.githubusercontent.com/docker/compose/1.21.2/contrib/completion/bash
 DK_BASH=https://raw.githubusercontent.com/docker/docker-ce
 
+function set_vagrant {
+  echo "INFO: Add bash completion for docker-compose"
+  sudo curl -s -L $DC_BASH/docker-compose -o /etc/bash_completion.d/docker-compose
+
+  echo "INFO: Add aliases for docker compose"
+  echo "alias dc='docker-compose'" >> $HOME/.bash_aliases
+  echo "complete -F _docker_compose dc" >> $HOME/.bash_aliases
+
+  echo "INFO: Add bash completion for docker engine"
+  sudo curl -s -L $DK_BASH/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh
+  echo "INFO: Add aliases for docker engine"
+  echo "alias dk='docker'" >> $HOME/.bash_aliases
+  echo "complete -F _docker dk" >> $HOME/.bash_aliases
+  echo "alias dk-ps='docker ps --format \"table {{.ID}}\t{{.Image}}\t{{.Status}}\"'" >> $HOME/.bash_aliases
+
+  exit 0
+}
+
 # Declare functions
 function set_docker_machine {
   echo "INFO: Install docker-machine"
@@ -80,6 +98,9 @@ function usage {
 }
 
 case "$1" in
+  vagrant)
+    set_vagrant
+    ;;
   engine)
     set_docker_engine
     ;;
