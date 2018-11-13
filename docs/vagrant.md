@@ -1,0 +1,73 @@
+# Vagrant environments
+
+## Ripple Stack - Desktop
+
+- `vagrant up desktop`
+- 192.168.50.10
+
+## Ripple Stack - Multi machine
+
+Stack 1
+ - `vagrant up stack1`
+ - 192.168.50.101
+
+Stack 2
+- `vagrant up stack2`
+- 192.168.50.102
+
+
+## Default Ripple Stack
+
+    vagrant up stack
+
+Starting the environment with the default should look like this:
+
+```shell
+2018-11-03 00:44:45 ⌚  box in ~/Development/ripple/ripple-stack
+± | origin U:1 ?:1 ✗| → vagrant up stack
+Bringing machine 'stack' up with 'virtualbox' provider...
+==> stack: Importing base box 'rippleosi/headless'...
+==> stack: Matching MAC address for NAT networking...
+==> stack: Checking if box 'rippleosi/headless' is up to date...
+==> stack: Setting the name of the VM: Ripple-Stack-Vagrant-Docker_stack_1541205917282_86432
+==> stack: Clearing any previously set network interfaces...
+==> stack: Preparing network interfaces based on configuration...
+   stack: Adapter 1: nat
+   stack: Adapter 2: hostonly
+==> stack: Forwarding ports...
+   stack: 8000 (guest) => 8000 (host) (adapter 1)
+   stack: 8001 (guest) => 8001 (host) (adapter 1)
+   stack: 8002 (guest) => 8002 (host) (adapter 1)
+   stack: 8003 (guest) => 8003 (host) (adapter 1)
+   stack: 8080 (guest) => 8080 (host) (adapter 1)
+   stack: 22 (guest) => 2222 (host) (adapter 1)
+==> stack: Running 'pre-boot' VM customizations...
+==> stack: Booting VM...
+==> stack: Waiting for machine to boot. This may take a few minutes...
+   stack: SSH address: 127.0.0.1:2222
+   stack: SSH username: vagrant
+   stack: SSH auth method: private key
+   stack: Vagrant insecure key detected. Vagrant will automatically replace
+   stack: this with a newly generated keypair for better security.
+   stack: Inserting generated public key within guest...
+   stack: Removing insecure key from the guest if its present...
+   stack: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> stack: Machine booted and ready!
+[stack] GuestAdditions 5.2.18 running --- OK.
+==> stack: Checking for guest additions in VM...
+==> stack: Setting hostname...
+==> stack: Configuring and enabling network interfaces...
+==> stack: Mounting shared folders...
+   stack: /docker => /Development/ripple/ripple-stack/docker
+   stack: /ripple-qewd => /Development/ripple/ripple-qewd
+   stack: /ripple-pulsetile => /Development/ripple/ripple-pulsetile
+==> stack: Running provisioner: docker...
+   stack: Installing Docker onto machine...
+==> stack: Running provisioner: shell...
+   stack: Running: /tmp/vagrant-shell20181103-31647-p85mos.sh
+   stack: INFO: Add bash completion for docker engine
+==> stack: Running provisioner: shell...
+   stack: Running: /tmp/vagrant-shell20181103-31647-1l9cnie.sh
+   stack: INFO: Install docker-compose
+   stack: INFO: Add bash completion for docker-compose
+```

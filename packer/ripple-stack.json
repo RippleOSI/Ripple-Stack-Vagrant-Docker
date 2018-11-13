@@ -1,0 +1,10 @@
+{
+  "_comment": "Build with `packer build -var-file=ubuntu1804.json -var-file=ripple-stack.json ubuntu.json`",
+  "vm_name": "ripple-U1804-stack",
+  "locale": "en_GB.UTF-8",
+  "cpus": "2",
+  "memory": "2048",
+  "disk_size": "32768",
+  "version": "0.1.1",
+  "headless": "true"
+}

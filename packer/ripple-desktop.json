@@ -1,0 +1,11 @@
+{
+  "_comment": "Build with `packer build -var-file=ubuntu1804-desktop.json -var-file=ripple-desktop.json ubuntu.json`",
+  "vm_name": "ripple-U1804-desktop",
+  "locale": "en_GB.UTF-8",
+  "cpus": "2",
+  "memory": "2048",
+  "disk_size": "32768",
+  "custom_script": "ripple-desktop.sh",
+  "version": "0.1.1",
+  "headless": "true"
+}
