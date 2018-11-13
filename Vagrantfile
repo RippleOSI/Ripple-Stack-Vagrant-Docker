@@ -13,9 +13,23 @@ $compose_version = "1.21.2"
 
 # Plugins
 ## Check for required plugins and install missing plugins
-required_plugins = %w( vagrant-vbguest vagrant-docker-compose )
-required_plugins.each do |plugin|
-    exec "vagrant plugin install #{plugin};vagrant #{ARGV.join(" ")}" unless Vagrant.has_plugin? plugin || ARGV[0] == 'plugin'
+plugins_dependencies = %w( vagrant-vbguest vagrant-docker-compose vagrant-hostsupdater )
+plugin_status = false
+plugins_dependencies.each do |plugin_name|
+  unless Vagrant.has_plugin? plugin_name
+    puts "Required plugins not found"
+    puts "Installing #{plugin_name}"
+    system("vagrant plugin install #{plugin_name}")
+    plugin_status = true
+    puts "Installed #{plugin_name}"
+  end
+end
+
+## Restart Vagrant if any new plugin installed
+if plugin_status === true
+  exec "vagrant #{ARGV.join' '}"
+else
+  plugin_status = false
 end
 
 Vagrant.configure("2") do |config|
@@ -70,6 +84,7 @@ Vagrant.configure("2") do |config|
     s.vm.network :private_network, ip: "#{$subnet}.100"
 
     # Forward ports in the guest's microservices to host ports
+    s.vm.network "forwarded_port", guest: 3000, host: 3000 # Pulsetile
     s.vm.network "forwarded_port", guest: 8000, host: 8000 # conductor-service-phr
     s.vm.network "forwarded_port", guest: 8001, host: 8001 # authentication-service-phr
     s.vm.network "forwarded_port", guest: 8002, host: 8002 # mpi-service
@@ -87,24 +102,24 @@ Vagrant.configure("2") do |config|
 
   ## Worker version
   (1..2).each do |i|
-    config.vm.define "worker#{i}", autostart: false do |s|
-      s.vm.box = "rippleosi/headless"
-      s.vm.box_version = "0.1.0"
-      s.vm.provider :virtualbox do |v|
+    config.vm.define "worker#{i}", autostart: false do |w|
+      w.vm.box = "rippleosi/headless"
+      w.vm.box_version = "0.1.0"
+      w.vm.provider :virtualbox do |v|
         v.cpus = 1
         v.memory = 2048
       end
 
       # Set vm hostname and network
-      s.vm.hostname = "worker#{i}"
-      s.vm.network :private_network, ip: "#{$subnet}.#{i+100}"
+      w.vm.hostname = "worker#{i}"
+      w.vm.network :private_network, ip: "#{$subnet}.#{i+100}"
 
       # Provision with Docker
-      s.vm.provision :docker
-      s.vm.provision "shell", path: "docker/docker-helpers.sh", args: "vagrant", privileged: false
+      w.vm.provision :docker
+      w.vm.provision "shell", path: "docker/docker-helpers.sh", args: "vagrant", privileged: false
 
       # Provision with Docker Compose
-      # s.vm.provision :docker_compose, compose_version: "#{$compose_version}", yml: "/docker/docker-compose.yml", rebuild: true, run: "always"
+      # w.vm.provision :docker_compose, compose_version: "#{$compose_version}", yml: "/docker/docker-compose.yml", rebuild: true, run: "always"
     end
   end
 
