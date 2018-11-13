@@ -2,7 +2,7 @@
 
 Our Vagrant boxes are built using Packer. Our core configuration comes from the [Boxcutter](https://github.com/boxcutter/ubuntu) vm templates for Ubuntu.
 
-You will need to install [Packer](https://www.packer.io/) and clone Boxcutter/Ubuntu `git clone https://github.com:boxcutter/ubuntu.git`
+You will need to install [Packer](https://www.packer.io/) and clone Boxcutter/Ubuntu `git clone https://github.com/boxcutter/ubuntu.git`
 
 ## Building
 
